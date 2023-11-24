@@ -1,0 +1,15 @@
+#!/usr/bin/gnuplot -c
+set terminal png enhanced crop
+set term pngcairo
+set terminal png size 1920,1080
+outfile = 'miss_false_pa_MF2_clockhm_data_alarm_st.png' 
+set output outfile
+	
+set xtics ("2" 2, "4" 6, "6" 10, "8" 14, "10" 18, "12" 22, "14" 26, "16" 30, "18" 34, "20" 38, "22" 42, "24" 46, "26" 50, "28" 54, "30" 58, "32" 62, "34" 66, "36" 70, "38" 74, "40" 78, "42" 82, "44" 86, "46" 90, "48" 94, "50" 98, "52" 102, "54" 106, "56" 110, "58" 114, "60" 118, "62" 122, "64" 126, "66" 130, "68" 134, "70" 138, "72" 142, "74" 146, "76" 150, "78" 154, "80" 158, "82" 162, "84" 166, )
+set title font 'Verdana,20'
+set title "MF2 Miss : False Alarms"
+set boxwidth 0.75
+set style fill solid
+
+plot 'miss_false_pa_MF2_clockhm_data_alarm_st.dat' every 2 using 1:2 with boxes ls 1 title 'Miss Alarms',\
+     'miss_false_pa_MF2_clockhm_data_alarm_st.dat' every 2::1 using 1:2 with boxes ls 2 title 'False Alarms' 

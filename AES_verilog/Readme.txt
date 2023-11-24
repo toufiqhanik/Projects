@@ -1,0 +1,1 @@
+codes are written on Initial ddays of learning Verilog/ RTL coding

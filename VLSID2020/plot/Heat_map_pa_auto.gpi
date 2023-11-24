@@ -1,0 +1,44 @@
+reset
+clear
+unset key
+unset cbtics
+#!/usr/bin/gnuplot -c
+set terminal png enhanced crop
+set term pngcairo
+set terminal png size 1920,1080
+
+do for [t=2:84:2] {
+	outfile = sprintf('pa_mf6_month_%d_data_plot.png', t)
+	set output outfile
+
+	set title font 'Verdana,20'
+	set xlabel font "Verdana,11"
+	set ylabel font "Verdana,11"
+	set cblabel font "Verdana,11" 
+	set format cb "%4.1f" 
+	set view map
+	set style increment default
+	set title sprintf("MF6 PA Month %i",t)
+	set xlabel "Voltage"
+	set ylabel "Temperature" 
+	set cblabel "Flip Flop Number" 
+	set samples 50, 50
+	set size 640,480
+	set cbtics border in scale 0,0 mirror norotate  offset character 0, 0, 0 autojustify
+	set isosamples 50, 50
+	set xrange [ .9999 : 1.4001 ] 
+	set yrange [ 0 : 40 ] 
+	set zrange [ 0 : 33 ]
+	set cbrange [ 0 : 33 ] noreverse writeback
+	set rrange [ * : * ] 
+	set palette rgbformulae -11, 17, 33
+	set dgrid3d
+	set pm3d interpolate 4,3.6
+	set colorbox user
+	set size 0.97, 1
+	
+	set colorbox vertical origin screen .89, 0.15, 0.7 size screen 0.03, .7, .5 front noborder
+	infile1 = sprintf('pa_month_%d_data.dat', t)
+	splot infile1 using 1:2:4 with pm3d	
+	
+	}

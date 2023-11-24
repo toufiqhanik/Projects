@@ -1,0 +1,27 @@
+#!/usr/bin/gnuplot -c
+set terminal png enhanced crop
+set term pngcairo
+set terminal png size 1920,1080
+
+do for [t=0:40:4] {
+	
+
+	outfile = sprintf('t_%d_mf6_miss_false_plot.png', t)
+	set output outfile
+	
+	set xtics("2" 2, "4" 6, "6" 10, "8" 14, "10" 18, "12" 22, "14" 26, "16" 30, "18" 34, "20" 38, "22" 42, "24" 46, "26" 50, "28" 54, "30" 58, "32" 62, "34" 66, "36" 70, "38" 74, "40" 78, "42" 82, "44" 86, "46" 90, "48" 94, "50" 98, "52" 102, "54" 106, "56" 110, "58" 114, "60" 118, "62" 122, "64" 126, "66" 130, "68" 134, "70" 138, "72" 142, "74" 146, "76" 150, "78" 154, "80" 158, "82" 162, "84" 166,)
+	#set xtics ("2" 2, "4" 4, "6" 6, "8" 8, "10" 10, "12" 12, "14" 14, "16" 16, "18" 18, "20" 20, "22" 22, "24" 24, "26" 26, "28" 28, "30" 30, "32" 32, "34" 34, "36" 36, "38" 38, "40" 40, "42" 42, "44" 44, "46" 46, "48" 48, "50" 50, "52" 52, "54" 54, "56" 56, "58" 58, "60" 60, "62" 62, "64" 64, "66" 66, "68" 68, "70" 70, "72" 72, "74" 74, "76" 76, "78" 78, "80" 80, "82" 82, "84" 84,)
+	set title font 'Verdana,20'
+	set title sprintf("Miss : False Alarms (Temperature: %d, MF6)",t)
+	#set title "Miss Alarms : False Alarms"
+	set yrange [ 0 : 12 ]
+	set boxwidth 0.75
+	set style fill solid
+	
+	
+	infile1 = sprintf('t_%d_miss_false_st.dat', t)
+
+	plot infile1 every 2 using 1:2 with boxes ls 1 title 'Miss Alarms',\
+		 infile1 every 2::1 using 1:2 with boxes ls 2 title 'False Alarms' 
+		 
+	}

@@ -1,0 +1,60 @@
+unset key
+set style increment default
+set view map scale 1
+set style data lines
+set xtics rotate by 90
+set xtics border in scale 0,0 mirror norotate  autojustify
+set ytics border in scale 0,0 mirror norotate  autojustify
+set ztics border in scale 0,0 nomirror norotate  autojustify
+set xtics rotate by 90
+unset cbtics
+set terminal png enhanced crop
+set term pngcairo
+set terminal png size 1920,1080 font "Helvetica-Bold,40"
+set border 4095 front lt black linewidth 1.000 dashtype solid
+outfile = 'blue_version1_with_matix_no interpolation.png'
+set output outfile
+set format cb "%4.1f" 
+set rtics axis in scale 0,0 nomirror norotate  autojustify
+set xrange [ -0.500000 : 10.50000 ] noreverse nowriteback
+set x2range [ * : * ] noreverse writeback
+set yrange [ -0.500000 : 10.50000 ] noreverse nowriteback
+set y2range [ * : * ] noreverse writeback
+set zrange [ * : * ] noreverse writeback
+set cblabel "AFN" 
+set cbtics border in scale 0,0 mirror norotate offset character 0, 0, 0 autojustify
+set cbrange [ 0 : 33 ]
+set rrange [ * : * ] noreverse writeback
+#set palette rgbformulae -7, 2, -7
+#set palette positive nops_allcF maxcolors 0 gamma 1.5 gray	 
+## Last datafile plotted: "$map1"
+#set palette defined ( 0 0.05 0.05 0.2, 0.1 0 0 1, 0.25 0.7 0.85 0.9,\
+     0.4 0 0.75 0, 0.5 1 1 0, 0.7 1 0 0, 0.9 0.6 0.6 0.6,\
+     1 0.95 0.95 0.95 )
+set palette rgbformulae -11, 17, 33
+set isosamples 100, 100
+$map1 << EOD
+,1.00,1.04,1.08,1.12,1.16,1.20,1.24,1.28,1.32,1.36,1.40
+0, 18.51, 20.0, 21.39, 22.51, 23.51, 24.0, 25.0, 26.0, 26.51, 27.0, 28.0, 
+4, 17.51, 19.0, 20.51, 21.51, 22.51, 23.0, 24.0, 25.0, 25.51, 26.0, 27.0, 
+8, 16.51, 18.0, 19.51, 20.51, 21.51, 22.0, 23.0, 23.51, 24.51, 25.0, 26.0, 
+12, 15.51, 17.49, 18.51, 19.51, 20.51, 21.0, 22.0, 22.51, 23.51, 24.0, 25.0, 
+16, 15.0, 16.51, 17.51, 18.51, 19.51, 20.0, 21.0, 21.51, 22.51, 23.0, 23.55, 
+20, 14.0, 15.51, 16.51, 17.51, 18.51, 19.1, 20.0, 20.51, 21.51, 22.0, 22.51, 
+24, 13.51, 14.51, 15.51, 16.51, 17.51, 18.51, 19.0, 19.51, 20.51, 21.0, 21.51, 
+28, 12.51, 13.51, 14.51, 15.51, 16.51, 17.51, 18.0, 18.51, 19.51, 20.0, 20.51, 
+32, 11.51, 12.51, 13.51, 14.51, 15.51, 16.51, 17.0, 17.51, 18.51, 19.0, 19.51, 
+36, 10.51, 11.51, 12.51, 13.51, 14.51, 15.51, 16.0, 16.51, 17.51, 18.0, 18.51, 
+40, 9.51, 10.51, 11.51, 12.51, 13.51, 14.51, 15.51, 15.51, 16.51, 17.0, 17.51, 
+
+EOD                   
+set colorbox user
+set size 0.87, 1
+set ylabel rotate left
+set colorbox vertical origin screen .8, 0.2, 0.9 size screen 0.03, .65, .5 front border
+set view map
+set datafile separator comma
+splot '$map1' matrix rowheaders columnheaders with image
+
+set datafile separator
+

@@ -1,0 +1,43 @@
+reset
+#clear
+unset key
+unset cbtics
+#!/usr/bin/gnuplot -c
+set terminal png enhanced crop
+set term pngcairo
+set terminal png size 1920,1080 font "Helvetica-Bold,40"
+
+outfile ='blue_version2_with_pm3d_with_interpolation.png'
+set output outfile
+set format cb "%4.1f" 
+set view map
+set style increment default
+#set title sprintf("Heatmap month %i",t)
+set xlabel "Voltage"
+set ylabel "Temperature" 
+set cblabel "AFN"
+set samples 50, 50
+#set size 640,480
+set cbtics border in scale 0,0 mirror norotate offset character 0, 0, 0 autojustify
+set isosamples 50, 50
+set xrange [ .9999 : 1.4001 ] 
+#set xrange [ .9 : 1.5 ]
+set yrange [ 0 : 40 ] 
+#set yrange [ -5 : 45 ]
+set zrange [ 0 : 33 ]
+set cbrange [ 0 : 33 ] noreverse writeback
+set rrange [ * : * ] 
+set palette rgbformulae -11, 17, 33
+#set palette defined ( 0 0.05 0.05 0.2, 0.1 0 0 1, 0.25 0.7 0.85 0.9,\
+     0.4 0 0.75 0, 0.5 1 1 0, 0.7 1 0 0, 0.9 0.6 0.6 0.6,\
+     1 0.95 0.95 0.95 )	
+#set palette positive nops_allcF maxcolors 0 gamma 1.5 gray	
+set dgrid3d
+set pm3d interpolate 4,3.6
+set colorbox user
+set size 0.87, 1
+	
+set colorbox vertical origin screen .8, 0.2, 0.9 size screen 0.03, .64, .5 front noborder
+infile1 ='npa_month_0_data.dat'
+splot infile1 using 1:2:3 with pm3d
+	

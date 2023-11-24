@@ -1,0 +1,22 @@
+reset
+clear
+set terminal png enhanced crop
+set output "npna_base_AFN_plot.png"
+#set title "Buffer Temperature: 24"
+set xrange [0 : 82]
+#set xrange [1.18 : 1.4001 ]
+set xlabel 'Months' offset 0,.2
+set yrange [14 : 19]
+set xtics rotate by 90
+#set ytics 8
+set terminal png size 1920,1480 font "Helvetica,23"
+#set terminal png size 1280,960 font "Helvetica,40"
+set grid lw 2
+set ylabel 'AFN' offset +1
+unset arrow 2
+set key bottom right outside spacing 1
+set size 1,0.6
+set samples 1500, 1500
+#plot x**2 w linespoints pointinterval 1
+#plot 'npa_base_re_v112_t25_AFN_plot.txt' u 1:2 w lp pi 10 lw 4 lc "black" t '0 month', \
+plot 'npa_base_re_v112_t25_AFN_plot.txt' u 1:2 w lp pi 10 lw 4 lc "black" t '0 month'
